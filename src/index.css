@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sawarabi+Gothic&family=Tenor+Sans&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: "Sawarabi Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    background-color: #121212;
+}
+
+nav{
+    background-color: #303030;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
