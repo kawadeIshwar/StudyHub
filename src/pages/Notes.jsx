@@ -12,10 +12,10 @@ const Notes = () => {
   };
 
   return (
-    <div className="p-6 bg-slate-400 m-12 rounded-[30px]">
+    <div className="p-6 rounded-[30px] animate-slideUp">
       <SearchBar onSearch={handleSearch} />
 
-      <div className="flex flex-wrap gap-6 justify-center ">
+      <div className="flex flex-wrap gap-9 justify-center ">
         <NoteCard
           title="DBMS Unit 1"
           subject="Database management system"

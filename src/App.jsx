@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Upload from './pages/Upload';
 import Notes from './pages/Notes';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -16,7 +16,7 @@ function App() {
         <Route path="/upload" element={<Upload />} />
         <Route path="/notes" element={<Notes />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
     </BrowserRouter>

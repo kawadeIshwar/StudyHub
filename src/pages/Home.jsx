@@ -3,7 +3,7 @@ import NoteCard from "../components/NoteCard";
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen text-2xl z-0">
-      <div className="bg-[#FFF86D] flex items-center min-h-[520px] m-6 md:m-14 rounded-[30px]">
+      <div className="bg-[#FFF86D] flex items-center min-h-[520px] m-6 md:m-14 rounded-[30px] animate-slideUp">
         <div className="flex flex-col custom-lg:flex-row w-full justify-between items-center px-6 gap-6">
 
           {/* Left Image */}
@@ -15,18 +15,30 @@ const Home = () => {
 
           {/* Center Text */}
           <div className="flex flex-col items-center gap-4 text-center">
-            <h1 className="text-5xl md:text-9xl custom-lg:text-8xl font-bold text-[#303030] transform transition-all duration-300 ease-out hover:scale-100 hover:-translate-y-1">StudyHub</h1>
-            <p className="text-lg md:text-3xl custom-lg:text-4xl text-[#f85f5f]  transform transition-all duration-300 ease-out hover:scale-100 hover:-translate-y-1">Share & Discover Notes</p>
+            <h1 className="text-5xl md:text-9xl custom-lg:text-8xl font-bold text-[#303030] 
+                           transform transition-all duration-300 ease-out hover:scale-100 hover:-translate-y-1">
+              StudyHub
+            </h1>
+            <p className="text-lg md:text-3xl custom-lg:text-4xl text-[#f85f5f]  transform transition-all
+                          duration-300 ease-out hover:scale-100 hover:-translate-y-1">
+              Share & Discover Notes
+            </p>
 
             <div className="flex gap-4 flex-col sm:flex-row">
 
               <button
                 type="submit"
-                class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-blue-500 text-blue-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 
+                       backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute 
+                       before:w-full before:transition-all before:duration-700 before:hover:w-full 
+                       before:-left-full before:hover:left-0 before:rounded-full before:bg-blue-500
+                       text-blue-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 
+                       before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
               >
                 Upload Notes
                 <svg
-                  class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                  class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear 
+                         duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
                   viewBox="0 0 16 19"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -39,11 +51,18 @@ const Home = () => {
 
               <button
                 type="submit"
-                class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg text-emerald-500 bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg text-emerald-500
+                      bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute
+                       before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full 
+                       before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 
+                       before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 
+                       overflow-hidden border-2 rounded-full group"
               >
                 Explore Notes
                 <svg
-                  class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                  class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 
+                         ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none
+                         p-2 rotate-45"
                   viewBox="0 0 16 19"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -66,16 +85,47 @@ const Home = () => {
         </div>
 
       </div>
-      <div className="bg-[#FFF86D] flex items-start min-h-[520px]  flex-col rounded-[30px]  mx-6 mb-6 mt-2 md:mx-14 ">
+      <div className=" flex items-center flex-col rounded-[30px] w-full animate-fadeIn">
 
-        <h1 className=" p-7 font-bold text-4xl text-[#303030]">Popular Notes To Discover:</h1>
-        <div className="flex p-6 gap-5 flex-wrap">
-          <NoteCard />
-          <NoteCard />
-          <NoteCard />
-          <NoteCard />
-          
-         
+        <h1 className=" p-7 font-bold text-5xl text-[#ffffff]  hover:text-[#ac31bc] transform transition-all
+                        duration-300 ease-out hover:scale-100 hover:-translate-y-1">
+          Popular Notes To Discover
+        </h1>
+        <div className="flex flex-wrap gap-9 w-full text-lg justify-center mt-5">
+          <NoteCard
+            title="DBMS Unit 1"
+            subject="Database management system"
+            uploader="Ishwar"
+            date="June 12"
+            likes={7} />
+
+          <NoteCard
+            title="DBMS Unit 1"
+            subject="Database management system"
+            uploader="Ishwar"
+            date="June 12"
+            likes={7} />
+
+          <NoteCard
+            title="DBMS Unit 1"
+            subject="Database management system"
+            uploader="Ishwar"
+            date="June 12"
+            likes={7} />
+
+          <NoteCard
+            title="DBMS Unit 1"
+            subject="Database management system"
+            uploader="Ishwar"
+            date="June 12"
+            likes={7} />
+
+          <NoteCard
+            title="DBMS Unit 1"
+            subject="Database management system"
+            uploader="Ishwar"
+            date="June 12"
+            likes={7} />
         </div>
 
       </div>
