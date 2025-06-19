@@ -9,7 +9,7 @@ const Signup = () => {
           w-full custom-lg:w-1/2"
         >
           <h1 className="text-4xl p-4 text-[#fff7a1]">Sign up</h1>
-          <p className="text-gray-300 mb-4 hidden min-xs:block">Please enter your username and password</p>
+          <p className="text-gray-300 mb-4 hidden min-xs:block">Please enter your username, Email and password</p>
 
           {/*Input 1 */}
           <div className="relative group w-full max-w-xs mb-4">

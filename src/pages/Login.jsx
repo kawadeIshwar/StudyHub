@@ -1,7 +1,7 @@
 const Login = () => {
   return (
     <div className="flex min-h-screen w-full justify-center">
-      <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px]">
+      <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px] ">
         
         <form
           className="flex flex-col items-center justify-center p-16 border-2 mx-10 my-6 border-blue-900 rounded-[30px] 
@@ -64,7 +64,7 @@ const Login = () => {
 
         {/* Side Image */}
         <img
-         src="student-6.png"
+         src="student-10.png"
          alt="student"
          className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden custom-lg:block h-full" />
       </div>
