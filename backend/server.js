@@ -1,6 +1,6 @@
 import express from 'express'; // Express helps us build the backend server.
 import mongoose from 'mongoose'; // Mongoose connects and works with MongoDB.
-import dotenv from 'dotenv'; // Loads environment variables from the .env file.
+import dotenv from 'dotenv'; // Loads environment variables from the .env file
 import cors from 'cors'; // Allows frontend (like React) to talk to this backend (CORS = Cross-Origin Resource Sharing).
 import uploadRoute from './routes/UploadNotes.js'; // Import the route for uploading notes.
 
