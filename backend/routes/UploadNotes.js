@@ -4,6 +4,7 @@ import cloudinary from '../utils/cloudinary.js'; // Cloudinary config for upload
 import Note from '../models/note.js'; // Note model (MongoDB schema)
 import { Router } from 'express'; // Import Router from Express
 import fs from 'fs'; // For deleting temporary files
+import auth from '../middleware/auth.js';
 
 
 const upload = multer({ dest: 'uploads/' }); // Save uploaded files temporarily in 'uploads/' folder
@@ -11,7 +12,7 @@ const router = Router(); // Create a router instance
 
 
 // POST route to upload a note
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/upload',auth, upload.single('file'), async (req, res) => {
 
   try {
     // Upload file to Cloudinary (as raw file like PDF)
@@ -39,5 +40,15 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     console.log(error);
   }
 });
+
+router.get('/all', async (req, res) => {
+  try {
+    const notes = await Note.find().sort({ date: -1 }); // latest first
+    res.status(200).json(notes);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 export default router; // Export router to use in other files

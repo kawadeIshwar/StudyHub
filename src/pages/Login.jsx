@@ -1,42 +1,74 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
 const Login = () => {
+  // States to hold input values
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Handle Login
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      const token = res.data.token;
+      localStorage.setItem('token', token); // Save token for future API use
+      alert('Login successful!');
+    } catch (err) {
+      alert(err.response?.data?.msg || 'Login failed!');
+    }
+  };
+
   return (
     <div className="flex min-h-screen w-full justify-center">
-      <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px] ">
+      <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px]">
         
+        {/* Login Form */}
         <form
           className="flex flex-col items-center justify-center p-16 border-2 mx-10 my-6 border-blue-900 rounded-[30px] 
           bg-gradient-to-tl from-[#000000] via-[#4e4e4e] to-[#000000]
-          transition-all duration-700  hover:shadow-emerald-500 animate-fadeIn 
+          transition-all duration-700 hover:shadow-emerald-500 animate-fadeIn 
           w-full custom-lg:w-1/2"
+          onSubmit={(e) => e.preventDefault()} // Prevent page refresh
         >
           <h1 className="text-5xl p-4 text-[#fff7a1]">Login</h1>
-          <p className="text-gray-300 mb-4 hidden min-xs:block">Please enter your username and password</p>
+          <p className="text-gray-300 mb-4 hidden min-xs:block">
+            Please enter your email and password
+          </p>
 
-          {/*Input 1 */}
+          {/* Email Input */}
           <div className="relative group w-full max-w-xs mb-4">
             <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500 via-cyan-500 to-sky-600 p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <input
-              type="text"
-              placeholder="Username"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 text-white bg-[#272727] rounded-xl relative z-10 outline-none 
               shadow-2xl shadow-emerald-900 placeholder-gray-400 focus:shadow-emerald-600 transition-all duration-300"
             />
           </div>
 
-          {/*Input 2 */}
+          {/* Password Input */}
           <div className="relative group w-full max-w-xs mb-6">
             <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500 via-cyan-500 to-sky-600 p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <input
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 text-white bg-[#272727] rounded-xl relative z-10 outline-none 
               shadow-2xl shadow-emerald-900 placeholder-gray-400 focus:shadow-emerald-600 transition-all duration-300"
             />
           </div>
 
-          {/* Button */}
+          {/* Login Button */}
           <div className="relative group mb-4">
             <button
+              onClick={handleLogin}
               className="relative inline-block p-px font-semibold leading-3 text-white bg-neutral-900 shadow-2xl cursor-pointer 
               rounded-2xl shadow-emerald-900 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-emerald-600"
             >
@@ -57,19 +89,25 @@ const Login = () => {
             </button>
           </div>
 
+          {/* Signup Redirect */}
           <p className="text-white">
-            Don't have an account? <a href="/Signup" className="text-emerald-400 underline">Sign Up</a>
+            Don't have an account?{" "}
+            <a href="/Signup" className="text-emerald-400 underline">
+              Sign Up
+            </a>
           </p>
         </form>
 
         {/* Side Image */}
         <img
-         src="student-10.png"
-         alt="student"
-         className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden custom-lg:block h-full" />
+          src="student-10.png"
+          alt="student"
+          className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden custom-lg:block h-full"
+        />
       </div>
     </div>
   );
 };
 
 export default Login;
+
