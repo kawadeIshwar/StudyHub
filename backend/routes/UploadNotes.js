@@ -1,54 +1,50 @@
+import multer from 'multer'; // Importing multer for handling file uploads
+import cloudinary from '../utils/cloudinary.js'; // Importing cloudinary for image/file storage
+import Note from '../models/note.js'; 
+import { Router } from 'express'; 
+import fs from 'fs'; // Importing Node.js file system module for deleting files
+import auth from '../middleware/auth.js'; // Importing authentication middleware to protect routes
 
-import multer from 'multer'; // For handling file uploads
-import cloudinary from '../utils/cloudinary.js'; // Cloudinary config for uploading files
-import Note from '../models/note.js'; // Note model (MongoDB schema)
-import { Router } from 'express'; // Import Router from Express
-import fs from 'fs'; // For deleting temporary files
-import auth from '../middleware/auth.js';
+const upload = multer({ dest: 'uploads/' }); 
+const router = Router(); 
 
-
-const upload = multer({ dest: 'uploads/' }); // Save uploaded files temporarily in 'uploads/' folder
-const router = Router(); // Create a router instance
-
-
-// POST route to upload a note
-router.post('/upload',auth, upload.single('file'), async (req, res) => {
-
+router.post('/', auth, upload.single('file'), async (req, res) => {
   try {
-    // Upload file to Cloudinary (as raw file like PDF)
+    if (!req.file) {
+      return res.status(400).json({ error: "File is required!" });
+    }
+
     const result = await cloudinary.uploader.upload(req.file.path, {
       resource_type: "raw",
     });
 
-  
-    // Create new Note using data from request
     const note = new Note({
       title: req.body.title,
       subject: req.body.subject,
       semester: req.body.semester,
-      tags: req.body.tags.split(','), // Convert comma-separated tags to array
-      fileUrl: result.secure_url, // Cloudinary file URL
-      uploader: req.body.uploader || "Unknown", // Default uploader if not given
+      tags: req.body.tags?.split(',') || [],
+      fileUrl: result.secure_url,
+      uploader: req.body.uploader || "Unknown",
     });
 
-    await note.save(); // Save note to MongoDB
-    fs.unlinkSync(req.file.path); // Delete file from local 'uploads/' folder
+    await note.save();
+    fs.unlink(req.file.path, () => {}); // async delete
 
-    res.status(200).json({ message: 'Note uploaded!', note }); // Send success response
+    res.status(200).json({ message: 'Note uploaded!', note });
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Handle errors
     console.log(error);
+    res.status(500).json({ error: error.message });
   }
 });
 
 router.get('/all', async (req, res) => {
   try {
-    const notes = await Note.find().sort({ date: -1 }); // latest first
+    const notes = await Note.find().sort({ date: -1 });
     res.status(200).json(notes);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
+export default router;
 
-export default router; // Export router to use in other files

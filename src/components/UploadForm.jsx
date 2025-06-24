@@ -30,10 +30,15 @@ const UploadForm = () => {
     data.append('file', formData.file);
 
     try {
+      console.log('FormData being sent:');
+      for (let pair of data.entries()) {
+  console.log(pair[0], pair[1]);
+}
+      console.log("File:", formData.file);
       const res = await axios.post('http://localhost:5000/api/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': localStorage.getItem('token')
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
       });
 
@@ -50,7 +55,8 @@ const UploadForm = () => {
       });
     } catch (err) {
       console.error(err);
-      alert('Upload failed!');
+      alert(err.response?.data?.error || 'Upload failed!');
+
     }
   };
 

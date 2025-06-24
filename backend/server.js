@@ -1,31 +1,34 @@
-import express from 'express'; // Express helps us build the backend server.
-import mongoose from 'mongoose'; // Mongoose connects and works with MongoDB.
-import dotenv from 'dotenv'; // Loads environment variables from the .env file
-import cors from 'cors'; // Allows frontend (like React) to talk to this backend (CORS = Cross-Origin Resource Sharing).
-import uploadRoute from './routes/UploadNotes.js'; // Import the route for uploading notes.
-import authRoutes from './routes/auth.js'; // Import authentication routes (register, login, etc.)
 
-dotenv.config(); // Load variables from .env (like MONGO_URI, PORT).
+import express from 'express'; // Framework to build backend
+import uploadRoutes from './routes/UploadNotes.js';// Upload notes routes
+import mongoose from 'mongoose'; // For MongoDB connection
+import dotenv from 'dotenv'; // Load .env file variables
+import cors from 'cors'; // Allow frontend to talk to backend
+import authRoutes from './routes/auth.js'; // Auth (login/register) routes
 
-const app = express(); // Create an Express app.
+dotenv.config(); // Load environment variables
+
+const app = express(); // Create express app
 
 // Middleware
-app.use(cors()); // Allow cross-origin requests.
-app.use(express.json()); // Parse incoming JSON data.
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON data from frontend
 
-app.use('/api', uploadRoute); // Use the upload route for handling note uploads.
+// Routes
+app.use('/api/upload', uploadRoutes); // Notes upload route
+app.use('/api/auth', authRoutes); // Auth route
 
-app.get('/upload', (req, res) => {
-  res.send('Upload route is working!');
+// Error handler (for any server error)
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Show error in terminal
+  res.status(500).send('Something broke!'); // Send error to frontend
 });
 
-app.use('/api/auth', authRoutes); 
-
-const PORT = process.env.PORT || 5000; // Use port from .env or default to 5000.
+const PORT = process.env.PORT || 5000; // Use port from .env or 5000
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`)); // Start server
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err)); // Log DB connection error

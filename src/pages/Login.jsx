@@ -18,7 +18,7 @@ const Login = () => {
       localStorage.setItem('token', token); // Save token for future API use
       alert('Login successful!');
     } catch (err) {
-      alert(err.response?.data?.msg || 'Login failed!');
+      alert(err.response?.data?.error || 'Login failed!');
     }
   };
 

@@ -5,8 +5,8 @@ import User from '../models/User.js'; // Import User model (MongoDB schema)
 
 const router = express.Router();      // Create a router object
 
-// ✅ REGISTER API
-router.post('/register', async (req, res) => {
+// ✅ SIGNUP API
+router.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body; // Get data from request body
 
