@@ -32,8 +32,8 @@ const UploadForm = () => {
     try {
       console.log('FormData being sent:');
       for (let pair of data.entries()) {
-  console.log(pair[0], pair[1]);
-}
+        console.log(pair[0], pair[1]);
+      }
       console.log("File:", formData.file);
       const res = await axios.post('http://localhost:5000/api/upload', data, {
         headers: {
@@ -44,7 +44,7 @@ const UploadForm = () => {
 
       alert('Note uploaded successfully!');
       console.log(res.data);
-
+      
       // Reset form
       setFormData({
         title: '',

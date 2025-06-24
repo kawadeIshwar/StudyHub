@@ -19,13 +19,14 @@ router.post('/', auth, upload.single('file'), async (req, res) => {
     });
 
     const note = new Note({
-      title: req.body.title,
-      subject: req.body.subject,
-      semester: req.body.semester,
-      tags: req.body.tags?.split(',') || [],
-      fileUrl: result.secure_url,
-      uploader: req.body.uploader || "Unknown",
-    });
+  title: req.body.title,
+  subject: req.body.subject,
+  semester: req.body.semester,
+  tags: req.body.tags?.split(',') || [],
+  fileUrl: result.secure_url,
+  uploader: req.user.name,
+});
+
 
     await note.save();
     fs.unlink(req.file.path, () => {}); // async delete
