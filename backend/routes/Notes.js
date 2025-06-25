@@ -9,7 +9,6 @@ router.delete('/:id', auth, async (req, res) => {
     const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ msg: 'Note not found' });
 
-    // ✅ Make sure only uploader can delete
     if (note.uploader.toString() !== req.user.id) {
       return res.status(403).json({ msg: 'Not allowed' });
     }

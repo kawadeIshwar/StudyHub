@@ -6,10 +6,14 @@ const noteSchema = new mongoose.Schema({
   semester: String,
   tags: [String],
   fileUrl: String,
-  uploader: String,
+  uploader: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // ✅ Refers to User model
+  },
   likes: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
 });
 
 export default mongoose.model('Note', noteSchema);
+
 // This code defines a Note model for MongoDB using Mongoose.

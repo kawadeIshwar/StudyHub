@@ -17,6 +17,7 @@ const Login = () => {
       const token = res.data.token;
       localStorage.setItem('token', token); // Save token for future API use
       alert('Login successful!');
+      window.location.reload(); // refreshes the page
       console.log(res.data)
     } catch (err) {
       alert(err.response?.data?.error || 'Login failed!');
@@ -26,7 +27,7 @@ const Login = () => {
   return (
     <div className="flex min-h-screen w-full justify-center">
       <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px]">
-        
+
         {/* Login Form */}
         <form
           className="flex flex-col items-center justify-center p-16 border-2 mx-10 my-6 border-blue-900 rounded-[30px] 

@@ -26,7 +26,8 @@ const Home = () => {
 
             <div className="flex gap-4 flex-col sm:flex-row">
               <button
-                type="submit"
+                onClick={() => (window.location.href = "/upload")}
+                type="button"
                 className="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 
                 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute 
                 before:w-full before:transition-all before:duration-700 before:hover:w-full 
@@ -49,6 +50,7 @@ const Home = () => {
 
               <button
                 type="submit"
+                onClick={() => (window.location.href = "/notes")}
                 className="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg text-emerald-500
                 bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute
                 before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full 
@@ -86,7 +88,7 @@ const Home = () => {
 
       {/* Popular Notes Section */}
       <div className="flex items-center flex-col rounded-[30px] w-full animate-fadeIn">
-        <h1 className="p-7 font-bold text-5xl text-[#ffffff] hover:text-[#ac31bc] transform transition-all duration-300 ease-out hover:scale-100 hover:-translate-y-1">
+        <h1 className="p-7 font-bold text-5xl text-[#ffffff] hover:text-[#6f95b8] transform transition-all duration-300 ease-out hover:scale-100 hover:-translate-y-1">
           Popular Notes To Discover
         </h1>
 

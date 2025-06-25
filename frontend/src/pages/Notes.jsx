@@ -45,7 +45,7 @@ const Notes = () => {
 
   return (
     <div className="p-6 rounded-[30px] animate-slideUp">
-      {/* 🔍 Search and Subject Filter */}
+      {/* Search and Subject Filter */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-between gap-4 mb-6">
         <SearchBar onSearch={(query) => setSearchQuery(query)} />
 
@@ -63,7 +63,7 @@ const Notes = () => {
         </select>
       </div>
 
-      {/* 📄 Notes Grid */}
+      {/*  Notes Grid */}
       <div className="flex flex-wrap gap-9 justify-center">
         {filteredNotes.length > 0 ? (
           filteredNotes.map((note) => (
@@ -73,10 +73,11 @@ const Notes = () => {
               title={note.title}
               subject={note.subject}
               uploader={note.uploader} // should be user ID
+              uploaderName={note.uploader?.name} 
               date={new Date(note.date).toLocaleDateString()}
               likes={note.likes}
               fileUrl={note.fileUrl} // make sure your note model has this
-              onDelete={handleDeleteNote} // 🔥 Call this after deleting
+              onDelete={handleDeleteNote} //  Call this after deleting
             />
           ))
         ) : (

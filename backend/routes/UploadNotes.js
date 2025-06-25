@@ -24,7 +24,7 @@ router.post('/', auth, upload.single('file'), async (req, res) => {
   semester: req.body.semester,
   tags: req.body.tags?.split(',') || [],
   fileUrl: result.secure_url,
-  uploader: req.user.name, // ✅ save uploader's name
+  uploader: req.user.id, // ✅ save uploader's name
 });
 
 
@@ -40,12 +40,13 @@ router.post('/', auth, upload.single('file'), async (req, res) => {
 
 router.get('/all', async (req, res) => {
   try {
-    const notes = await Note.find().sort({ date: -1 });
+    const notes = await Note.find().sort({ date: -1 }).populate('uploader', 'name email');
     res.status(200).json(notes);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 export default router;
 
