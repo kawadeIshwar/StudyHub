@@ -44,7 +44,7 @@ const Notes = () => {
     );
 
   return (
-    <div className="p-6 rounded-[30px] animate-slideUp">
+    <div className="p-6 rounded-[30px] animate-slideUp min-h-screen z-0">
       {/* Search and Subject Filter */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-between gap-4 mb-6">
         <SearchBar onSearch={(query) => setSearchQuery(query)} />
@@ -64,7 +64,7 @@ const Notes = () => {
       </div>
 
       {/*  Notes Grid */}
-      <div className="flex flex-wrap gap-9 justify-center">
+      <div className="flex flex-wrap gap-9 justify-center ">
         {filteredNotes.length > 0 ? (
           filteredNotes.map((note) => (
             <NoteCard
