@@ -9,6 +9,7 @@ const noteSchema = new mongoose.Schema({
   uploader: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // ✅ Refers to User model
+    required: true,
   },
   likes: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },

@@ -5,7 +5,7 @@ import mongoose from 'mongoose'; // For MongoDB connection
 import dotenv from 'dotenv'; // Load .env file variables
 import cors from 'cors'; // Allow frontend to talk to backend
 import authRoutes from './routes/auth.js'; // Auth (login/register) routes
-import deleteRoutes from './routes/notes.js'; // Delete notes routes
+import deleteRoutes from './routes/DeleteNotes.js'; // Delete notes routes
 
 dotenv.config(); // Load environment variables
 
@@ -18,7 +18,7 @@ app.use(express.json()); // Parse JSON data from frontend
 // Routes
 app.use('/api/upload', uploadRoutes); // Notes upload route
 app.use('/api/auth', authRoutes); // Auth route
-app.use('/api/delete', deleteRoutes); // Delete notes route
+app.use('/api/notes', deleteRoutes); // Delete notes route
 
 // Error handler (for any server error)
 app.use((err, req, res, next) => {

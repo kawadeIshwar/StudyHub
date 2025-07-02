@@ -15,10 +15,6 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
 
   // uploader is an object now: { _id, name }
   isOwner = decodedUserId === uploader?._id;
-
-  console.log("Token decoded user ID:", decoded?.id);
-  console.log("Uploader ID:", uploader?._id);
-  console.log("Is Owner?", isOwner);
 }
 
 
@@ -26,15 +22,16 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
 const handleDelete = async () => {
   try {
     await axios.delete(`http://localhost:5000/api/notes/${id}`, {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     });
     alert("Note deleted");
     onDelete(id); // callback to remove note from Notes.jsx
   } catch (error) {
     alert("Failed to delete note");
+    console.error("Delete Error:", error.response?.data || error.message);
   }
-
 };
+
 
 
 return (
@@ -91,4 +88,3 @@ return (
 };
 
 export default NoteCard;
-
