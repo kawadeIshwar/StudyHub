@@ -76,7 +76,8 @@ const Notes = () => {
               uploaderName={note.uploader?.name} 
               date={new Date(note.date).toLocaleDateString()}
               likes={note.likes}
-              fileUrl={note.fileUrl} // make sure your note model has this
+              fileUrl={note.fileUrl} 
+              format={note.format} 
               onDelete={handleDeleteNote} //  Call this after deleting
             />
           ))
@@ -89,6 +90,9 @@ const Notes = () => {
 };
 
 export default Notes;
+
+
+
 
 
 

@@ -6,6 +6,10 @@ const noteSchema = new mongoose.Schema({
   semester: String,
   tags: [String],
   fileUrl: String,
+  format: {
+    type: String,
+    required: true,
+  },
   uploader: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // ✅ Refers to User model

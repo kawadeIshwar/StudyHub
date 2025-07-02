@@ -24,6 +24,7 @@ router.post('/', auth, upload.single('file'), async (req, res) => {
   semester: req.body.semester,
   tags: req.body.tags?.split(',') || [],
   fileUrl: result.secure_url,
+  format: req.file.mimetype.split('/')[1], // Extracting file format from MIME type
   uploader: req.user.id, // ✅ save uploader's name
 });
 
@@ -49,5 +50,4 @@ router.get('/all', async (req, res) => {
 
 
 export default router;
-
 
