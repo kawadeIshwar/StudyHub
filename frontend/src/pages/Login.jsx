@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  // States to hold input values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Get redirect path (or go to home if none)
+  const redirectPath = new URLSearchParams(location.search).get('redirect') || '/';
 
   // Handle Login
   const handleLogin = async () => {
@@ -15,10 +20,9 @@ const Login = () => {
       });
 
       const token = res.data.token;
-      localStorage.setItem('token', token); // Save token for future API use
+      localStorage.setItem('token', token);
       alert('Login successful!');
-      window.location.reload(); // refreshes the page
-      console.log(res.data)
+      navigate(redirectPath);  // ✅ Redirect back after login
     } catch (err) {
       alert(err.response?.data?.error || 'Login failed!');
     }
@@ -34,7 +38,7 @@ const Login = () => {
           bg-gradient-to-tl from-[#000000] via-[#4e4e4e] to-[#000000]
           transition-all duration-700 hover:shadow-emerald-500 animate-fadeIn 
           w-full custom-lg:w-1/2"
-          onSubmit={(e) => e.preventDefault()} // Prevent page refresh
+          onSubmit={(e) => e.preventDefault()}
         >
           <h1 className="text-5xl p-4 text-[#fff7a1]">Login</h1>
           <p className="text-gray-300 mb-4 hidden min-xs:block">
@@ -51,6 +55,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 text-white bg-[#272727] rounded-xl relative z-10 outline-none 
               shadow-2xl shadow-emerald-900 placeholder-gray-400 focus:shadow-emerald-600 transition-all duration-300"
+              required
             />
           </div>
 
@@ -64,6 +69,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 text-white bg-[#272727] rounded-xl relative z-10 outline-none 
               shadow-2xl shadow-emerald-900 placeholder-gray-400 focus:shadow-emerald-600 transition-all duration-300"
+              required
             />
           </div>
 
@@ -112,4 +118,3 @@ const Login = () => {
 };
 
 export default Login;
-

@@ -1,12 +1,12 @@
 import multer from 'multer'; // Importing multer for handling file uploads
 import cloudinary from '../utils/cloudinary.js'; // Importing cloudinary for image/file storage
-import Note from '../models/Note.js'; 
-import { Router } from 'express'; 
+import Note from '../models/Note.js';
+import { Router } from 'express';
 import fs from 'fs'; // Importing Node.js file system module for deleting files
 import auth from '../middleware/auth.js'; // Importing authentication middleware to protect routes
 
-const upload = multer({ dest: 'uploads/' }); 
-const router = Router(); 
+const upload = multer({ dest: 'uploads/' });
+const router = Router();
 
 router.post('/', auth, upload.single('file'), async (req, res) => {
   try {
@@ -15,22 +15,25 @@ router.post('/', auth, upload.single('file'), async (req, res) => {
     }
 
     const result = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "raw",
-    });
-
-    const note = new Note({
-  title: req.body.title,
-  subject: req.body.subject,
-  semester: req.body.semester,
-  tags: req.body.tags?.split(',') || [],
-  fileUrl: result.secure_url,
-  format: req.file.mimetype.split('/')[1], // Extracting file format from MIME type
-  uploader: req.user.id, // ✅ save uploader's name
+  resource_type: "raw",
+  use_filename: true,              // ✅ Keep original filename
+  unique_filename: false,          // ✅ Don't add random text
 });
 
 
+    const note = new Note({
+      title: req.body.title,
+      subject: req.body.subject,
+      semester: req.body.semester,
+      tags: req.body.tags?.split(',') || [],
+      fileUrl: result.secure_url,
+      format: req.file.mimetype.split('/')[1], // Extracting file format from MIME type
+      uploader: req.user.id, // ✅ save uploader's name
+    });
+
+
     await note.save();
-    fs.unlink(req.file.path, () => {}); // async delete
+    fs.unlink(req.file.path, () => { }); // async delete
 
     res.status(200).json({ message: 'Note uploaded!', note });
   } catch (error) {

@@ -22,6 +22,14 @@ const UploadForm = () => {
   // Submit form data to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Please login first to upload notes.");
+      window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+      return; // Stop further upload
+    }
+
     const data = new FormData();
     data.append('title', formData.title);
     data.append('subject', formData.subject);
@@ -35,16 +43,17 @@ const UploadForm = () => {
         console.log(pair[0], pair[1]);
       }
       console.log("File:", formData.file);
+
       const res = await axios.post('http://localhost:5000/api/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${token}`,
         },
       });
 
       alert('Note uploaded successfully!');
       console.log(res.data);
-      
+
       // Reset form
       setFormData({
         title: '',
@@ -56,7 +65,6 @@ const UploadForm = () => {
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.error || 'Upload failed!');
-
     }
   };
 

@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch }) => {
         placeholder="Search notes by title, subject, tags..."
         value={query}
         onChange={(e) => setQuery(e.target.value)} // updates query on typing.
-        className="w-full sm:w-96 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition duration-200 text-base text-gray-700 hover:bg-yellow-200 "
+        className="w-full sm:w-96 px-4 py-2 rounded-lg  border border-gray-300 focus:outline-none focus:ring-2 transition duration-200 text-base text-gray-950 hover:text-gray-100 hover:bg-gray-600 "
       />
       <button
         type="submit"
