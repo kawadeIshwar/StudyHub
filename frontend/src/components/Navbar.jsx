@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token');
+    setToken(savedToken);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+    window.location.href = '/login';
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -22,18 +34,14 @@ const Navbar = () => {
         <NavItem to="/" text="Home" />
         <NavItem to="/upload" text="Upload" />
         <NavItem to="/notes" text="Explore" />
-        {!localStorage.getItem("token") ? (
+        {!token ? (
           <>
             <NavItem to="/login" text="Login" />
             <NavItem to="/signup" text="Sign up" />
           </>
         ) : (
           <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-              window.location.reload();
-            }}
+            onClick={handleLogout}
             className="hover:text-black hover:underline transition"
           >
             Logout
@@ -51,7 +59,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu with Smooth Transition */}
+      {/* Mobile Menu */}
       <div
         className={`absolute top-full left-0 w-full bg-[#637fa7] shadow-lg flex flex-col items-center space-y-4 py-4 md:hidden z-50 transition-all duration-500 ease-in-out ${
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
@@ -60,7 +68,7 @@ const Navbar = () => {
         <NavItem to="/" text="Home" onClick={toggleMenu} />
         <NavItem to="/upload" text="Upload" onClick={toggleMenu} />
         <NavItem to="/notes" text="Explore" onClick={toggleMenu} />
-        {!localStorage.getItem("token") ? (
+        {!token ? (
           <>
             <NavItem to="/login" text="Login" onClick={toggleMenu} />
             <NavItem to="/signup" text="Sign up" onClick={toggleMenu} />
@@ -68,9 +76,8 @@ const Navbar = () => {
         ) : (
           <button
             onClick={() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-              window.location.reload();
+              handleLogout();
+              toggleMenu();
             }}
             className="hover:text-black hover:underline transition"
           >
@@ -82,7 +89,6 @@ const Navbar = () => {
   );
 };
 
-// NavItem Component
 const NavItem = ({ to, text, onClick }) => (
   <Link
     to={to}

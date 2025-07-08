@@ -92,7 +92,7 @@ const Home = () => {
           Popular Notes To Discover
         </h1>
 
-        <div className="flex flex-wrap gap-9 w-full text-lg justify-center mt-5">
+        <div className="flex flex-wrap gap-9 w-full text-sm justify-center mt-5 sm:px-10 px-5">
           {[...Array(5)].map((_, i) => (
             <NoteCard
               key={i}
@@ -100,7 +100,7 @@ const Home = () => {
               subject="Database management system"
               uploader="Ishwar"
               date="June 12"
-              likes={7 + i}
+              
             />
           ))}
         </div>

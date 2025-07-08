@@ -23,23 +23,24 @@ const Login = () => {
       localStorage.setItem('token', token);
       alert('Login successful!');
       navigate(redirectPath);  // ✅ Redirect back after login
+      window.location.reload();
     } catch (err) {
       alert(err.response?.data?.error || 'Login failed!');
     }
   };
 
   return (
-    <div className="flex min-h-screen w-full justify-center">
-      <div className="flex bg-[#c0bfb4] m-14 rounded-[30px] w-[1000px] h-[520px]">
-
+    <div className="flex min-h-screen w-full justify-center items-center p-4">
+      <div className="flex flex-col lg:flex-row bg-[#c0bfb4] rounded-[30px] w-full 
+      max-w-5xl h-[520px] justify-center items-center shadow-xl animate-slideUp ">
         {/* Login Form */}
         <form
-          className="flex flex-col items-center justify-center p-16 border-2 mx-10 my-6 border-blue-900 rounded-[30px] 
-          bg-gradient-to-tl from-[#000000] via-[#4e4e4e] to-[#000000]
-          transition-all duration-700 hover:shadow-emerald-500 animate-fadeIn 
-          w-full custom-lg:w-1/2"
+          className="flex flex-col items-center justify-center p-8 sm:p-12 md:p-16 border-2 border-gray-700 rounded-[30px] 
+               bg-gradient-to-tl from-[#000000] via-[#4e4e4e] to-[#000000] w-full lg:w-1/2 
+               h-screen lg:h-auto lg:m-5 transition-all duration-700 hover:shadow-emerald-500 animate-fadeIn"
+
           onSubmit={(e) => e.preventDefault()}
-        >
+          >
           <h1 className="text-5xl p-4 text-[#fff7a1]">Login</h1>
           <p className="text-gray-300 mb-4 hidden min-xs:block">
             Please enter your email and password
@@ -110,7 +111,7 @@ const Login = () => {
         <img
           src="student-10.png"
           alt="student"
-          className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden custom-lg:block h-full"
+          className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden lg:block h-full"
         />
       </div>
     </div>

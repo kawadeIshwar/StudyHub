@@ -70,12 +70,12 @@ const UploadForm = () => {
 
   return (
     <div className="flex min-h-screen w-full justify-center">
-      <div className="flex bg-[#b3b3b3] m-14 rounded-[30px] w-[1000px] h-[520px] justify-center items-center animate-slideUp">
+      <div className="flex bg-[#b3b3b3] mt-12 rounded-[30px] w-[1000px] h-[520px] justify-center items-center animate-slideUp ">
         <form
           onSubmit={handleSubmit}
           className="bg-white/20 backdrop-blur-md border border-white shadow-lg p-8 rounded-2xl
           w-full md:m-10 sm:m-4 sm-h-full mx-auto my-10 bg-gradient-to-tl from-[#0e0c2d] via-[#216578]
-          to-[#01152b] animate-fadeIn text-blue-100 custom-lg:w-1/2"
+          to-[#01152b] animate-fadeIn text-blue-100 custom-lg:w-1/2 sm:w-full sm" 
         >
           <h2 className="text-2xl font-bold text-center text-[#83def8] mb-6">
             Upload Notes
