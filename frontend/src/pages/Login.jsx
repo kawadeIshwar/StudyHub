@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,11 +24,10 @@ const Login = () => {
 
       const token = res.data.token;
       localStorage.setItem('token', token);
-      alert('Login successful!');
-      navigate(redirectPath);  // ✅ Redirect back after login
-      window.location.reload();
+      toast.success("Login Successful!");
+      window.dispatchEvent(new Event("storage"));
     } catch (err) {
-      alert(err.response?.data?.error || 'Login failed!');
+      toast.error(err.response?.data?.error || 'Login failed! Please try again.');
     }
   };
 
@@ -77,7 +79,9 @@ const Login = () => {
           {/* Login Button */}
           <div className="relative group mb-4">
             <button
+            
               onClick={handleLogin}
+              
               className="relative inline-block p-px font-semibold leading-3 text-white bg-neutral-900 shadow-2xl cursor-pointer 
               rounded-2xl shadow-emerald-900 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-emerald-600"
             >
@@ -96,6 +100,7 @@ const Login = () => {
                 </div>
               </span>
             </button>
+            
           </div>
 
           {/* Signup Redirect */}

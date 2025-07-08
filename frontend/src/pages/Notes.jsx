@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import NoteCard from '../components/NoteCard';
-import { toast } from 'react-toastify';
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -16,7 +17,6 @@ const Notes = () => {
         const res = await axios.get('http://localhost:5000/api/upload/all');
         setNotes(res.data); // Save notes in state
       } catch (error) {
-        console.error('Failed to fetch notes:', error);
         toast.error("Couldn't load notes");
       }
     };

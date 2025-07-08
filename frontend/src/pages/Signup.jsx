@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -22,10 +24,10 @@ const Signup = () => {
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
-      alert('Registered successfully!');
+      toast.success('Registered successfully!');
       setFormData({ name: '', email: '', password: '' }); // reset form
     } catch (err) {
-      alert(err.response?.data?.msg || 'Signup failed!');
+      toast.error(err.response?.data?.msg || 'Signup failed!');
     }
   };
 

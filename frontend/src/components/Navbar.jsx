@@ -1,21 +1,35 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('token');
-    setToken(savedToken);
+    const handleStorageChange = () => {
+      const savedToken = localStorage.getItem('token');
+      setToken(savedToken);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const handleLogout = () => {
+  toast.success('Logout successful!');
+  setTimeout(() => {
     localStorage.removeItem('token');
     setToken(null);
     window.location.href = '/login';
-  };
+  }, 1500);  // delay for toast to show
+};
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -100,4 +114,5 @@ const NavItem = ({ to, text, onClick }) => (
 );
 
 export default Navbar;
+
 
