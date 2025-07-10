@@ -15,21 +15,32 @@ const Login = () => {
   const redirectPath = new URLSearchParams(location.search).get('redirect') || '/';
 
   // Handle Login
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
-        email,
-        password,
-      });
+const handleLogin = async () => {
+  try {
+    const res = await axios.post('http://localhost:5000/api/auth/login', {
+      email,
+      password,
+    });
 
-      const token = res.data.token;
-      localStorage.setItem('token', token);
-      toast.success("Login Successful!");
-      window.dispatchEvent(new Event("storage"));
-    } catch (err) {
-      toast.error(err.response?.data?.error || 'Login failed! Please try again.');
-    }
-  };
+    const token = res.data.token;
+    localStorage.setItem('token', token);
+    toast.success("Login Successful!");
+    window.dispatchEvent(new Event("storage"));
+
+    // Reset form data
+    setEmail('');
+    setPassword('');
+
+    // Redirect after 1.5 seconds
+    setTimeout(() => {
+      window.location.href = '/';  // Change '/' to your home page route
+    }, 2000);
+
+  } catch (err) {
+    toast.error(err.response?.data?.error || 'Login failed! Please try again.');
+  }
+};
+
 
   return (
     <div className="flex min-h-screen w-full justify-center items-center p-4">

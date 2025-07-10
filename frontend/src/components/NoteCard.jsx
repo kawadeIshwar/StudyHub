@@ -1,8 +1,8 @@
-import { FaRegHeart, FaDownload, FaTrashAlt } from "react-icons/fa";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { jwtDecode } from 'jwt-decode';
-import axios from "axios";
-import { toast } from 'react-toastify';
+import { FaDownload } from "react-icons/fa";   // Download icon
+import DeleteIcon from '@mui/icons-material/Delete'; // Delete icon
+import { jwtDecode } from 'jwt-decode';       // Decode JWT token
+import axios from "axios";                    // For API requests
+import { toast } from 'react-toastify';       // For toast messages
 import 'react-toastify/dist/ReactToastify.css';
 
 const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fileUrl, format, onDelete }) => {
@@ -10,39 +10,40 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
   let isOwner = false;
 
   if (token) {
-    const decoded = jwtDecode(token);
+    const decoded = jwtDecode(token);        // Decode token to get user ID
     const decodedUserId = decoded.id;
-    isOwner = decodedUserId === uploader?._id;
+    isOwner = decodedUserId === uploader?._id; // Check if current user is uploader
   }
 
+  // ✅ Download Handler
   const handleDownload = async () => {
     try {
-      const res = await axios.get(fileUrl, { responseType: 'blob' });
+      const res = await axios.get(fileUrl, { responseType: 'blob' }); // Fetch file as blob (binary)
 
-      const blob = new Blob([res.data], { type: res.headers['content-type'] });
+      const blob = new Blob([res.data], { type: res.headers['content-type'] }); // Create blob from data
 
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = `${title}.${format}`;  // file name + correct format
+      const link = document.createElement('a');  // Create a hidden link
+      link.href = URL.createObjectURL(blob);     // Set blob URL as link
+      link.download = `${title}.${format}`;      // Set download filename
       document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      toast.success("Download started!");
+      link.click();                              // Auto-click to download
+      link.remove();                             // Remove link after download
+      console.log(fileUrl);
+      toast.success("Note Downloaded!");
     } catch (error) {
       console.error(error);
       toast.error("Download failed!");
     }
   };
 
-
+  // ✅ Delete Handler
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:5000/api/notes/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` }, // Send token for auth
       });
       toast.success("Note deleted");
-      onDelete(id);
+      onDelete(id);  // Call parent to remove note from UI
     } catch (error) {
       toast.error("Failed to delete note");
       console.error("Delete Error:", error.response?.data || error.message);
@@ -60,21 +61,17 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-5">
-        {/* ✅ Download button only */}
-        <a
-
+        {/* ✅ Download Button */}
+        <button
           onClick={handleDownload}
-          className="flex items-center justify-center gap-2 w-36 h-10 rounded-md text-white font-semibold 
-          bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 shadow-xl hover:scale-105
-           hover:from-gray-900 hover:to-gray-700 transition-all duration-300 cursor-pointer"
+          className="flex items-center justify-center gap-2 w-36 h-10 rounded-md text-white font-semibold bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 shadow-xl hover:scale-105 transition-all duration-300"
         >
           <FaDownload />
-          Download file
-
-        </a>
+          Download
+        </button>
       </div>
 
-      {/* ✅ Delete button (if user is owner) */}
+      {/* ✅ Delete Button (Owner Only) */}
       {isOwner && (
         <button
           onClick={handleDelete}
@@ -89,4 +86,8 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
 };
 
 export default NoteCard;
-
+// This component displays a note card with details like title, subject, uploader, and date
+// It includes a download button to fetch the note file and a delete button for the owner
+// The download button fetches the file as a blob and triggers a download
+// The delete button sends a request to the server to remove the note and updates the UI accordingly
+// It uses JWT decoding to check if the current user is the owner of the note

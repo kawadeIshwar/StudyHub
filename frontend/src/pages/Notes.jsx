@@ -16,6 +16,7 @@ const Notes = () => {
       try {
         const res = await axios.get('http://localhost:5000/api/upload/all');
         setNotes(res.data); // Save notes in state
+        
       } catch (error) {
         toast.error("Couldn't load notes");
       }
@@ -67,6 +68,7 @@ const Notes = () => {
 
       {/*  Notes Grid */}
       <div className="flex flex-wrap gap-9 justify-center ">
+        
         {filteredNotes.length > 0 ? (
           filteredNotes.map((note) => (
             <NoteCard
@@ -92,7 +94,12 @@ const Notes = () => {
 };
 
 export default Notes;
-
+// ✅ Notes page to display all notes with search and filter functionality
+// ✅ Uses SearchBar component for searching notes by title, subject, or tags
+// ✅ Uses NoteCard component to display each note
+// ✅ Fetches notes from backend API and handles delete functionality
+// ✅ Filters notes based on selected subject and search query
+// ✅ Displays unique subjects in a dropdown for filtering
 
 
 

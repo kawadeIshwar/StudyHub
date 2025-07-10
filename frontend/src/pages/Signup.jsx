@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { toast} from 'react-toastify';
+import { useState } from 'react';    // To manage form data
+import axios from 'axios';           // For API requests
+import { toast } from 'react-toastify';  // For toast messages
 import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
@@ -10,7 +10,7 @@ const Signup = () => {
     password: '',
   });
 
-  // handle input change
+  // ✅ Handle input change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,37 +18,42 @@ const Signup = () => {
     });
   };
 
-  // handle form submit
+  // ✅ Handle form submit
   const handleSubmit = async (e) => {
-    e.preventDefault(); // prevent page reload
+    e.preventDefault(); // Prevent page reload
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
       toast.success('Registered successfully!');
-      setFormData({ name: '', email: '', password: '' }); // reset form
+
+      setFormData({ name: '', email: '', password: '' }); // Reset form
+
+      // ✅ Redirect to login page after 2 sec
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
     } catch (err) {
       toast.error(err.response?.data?.msg || 'Signup failed!');
     }
   };
 
   return (
-     <div className="flex min-h-screen w-full justify-center items-center p-4">
+    <div className="flex min-h-screen w-full justify-center items-center p-4">
       <div className="flex flex-col lg:flex-row bg-[#c0bfb4] rounded-[30px] w-full 
       max-w-5xl h-[520px] justify-center items-center shadow-xl animate-slideUp ">
-        {/* Login Form */}
+        {/* Signup Form */}
         <form
-        onSubmit={handleSubmit}
-          className="flex flex-col items-center justify-center p-8 sm:p-12  border-2 border-gray-700 rounded-[30px] 
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-gray-700 rounded-[30px] 
                bg-gradient-to-tl from-[#000000] via-[#4e4e4e] to-[#000000] w-full lg:w-1/2 
                h-screen lg:h-auto lg:m-5 transition-all duration-700 hover:shadow-emerald-500 animate-fadeIn"
-
         >
           <h1 className="text-4xl p-4 text-[#fff7a1]">Sign up</h1>
           <p className="text-gray-300 mb-4 hidden min-xs:block">
             Please enter your username, email and password
           </p>
 
-          {/* Name */}
+          {/* Name Input */}
           <div className="relative group w-full max-w-xs mb-4">
             <input
               type="text"
@@ -62,7 +67,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* Email */}
+          {/* Email Input */}
           <div className="relative group w-full max-w-xs mb-4">
             <input
               type="email"
@@ -76,7 +81,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* Password */}
+          {/* Password Input */}
           <div className="relative group w-full max-w-xs mb-6">
             <input
               type="password"
@@ -90,7 +95,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* Submit button */}
+          {/* Submit Button */}
           <div className="relative group mb-4">
             <button
               type="submit"
@@ -108,7 +113,7 @@ const Signup = () => {
             </button>
           </div>
 
-          {/* Link to Login */}
+          {/* Link to Login Page */}
           <p className="text-white">
             Already have an account?{' '}
             <a href="/Login" className="text-emerald-400 underline">
@@ -117,7 +122,7 @@ const Signup = () => {
           </p>
         </form>
 
-        {/* Side image */}
+        {/* Side Image */}
         <img
           src="student-9.png"
           alt="student"

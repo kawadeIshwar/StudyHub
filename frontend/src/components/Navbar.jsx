@@ -1,37 +1,36 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react';   // Hooks for state and side effects
+import { Link } from 'react-router-dom';       // For navigation links
+import { FaBars, FaTimes } from 'react-icons/fa'; // Icons for menu toggle
+import { toast } from 'react-toastify';        // For toast notifications
 import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [isOpen, setIsOpen] = useState(false); // For mobile menu open/close
+  const [token, setToken] = useState(localStorage.getItem('token')); // Get token from localStorage
 
   useEffect(() => {
     const handleStorageChange = () => {
       const savedToken = localStorage.getItem('token');
-      setToken(savedToken);
+      setToken(savedToken);  // Update token if changed elsewhere
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('storage', handleStorageChange); // Listen for storage changes
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange); // Cleanup listener
     };
   }, []);
 
   const handleLogout = () => {
-  toast.success('Logout successful!');
-  setTimeout(() => {
-    localStorage.removeItem('token');
-    setToken(null);
-    window.location.href = '/login';
-  }, 1500);  // delay for toast to show
-};
+    toast.success('Logout successful!');  // Show logout message
+    setTimeout(() => {
+      localStorage.removeItem('token');   // Remove token from storage
+      setToken(null);                     // Clear token state
+      window.location.href = '/login';    // Redirect to login page
+    }, 1500);  // Delay to show toast
+  };
 
-
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(!isOpen); // Open/close mobile menu
 
   return (
     <nav className="navbar sticky top-0 bg-[#637fa7] px-6 py-4 flex justify-between items-center z-50 text-white shadow-[0_4px_10px_0_rgba(0,0,0,1)]">
@@ -43,7 +42,7 @@ const Navbar = () => {
         StudyHub
       </Link>
 
-      {/* Desktop Links */}
+      {/* Desktop Links (shown only on medium screens and up) */}
       <div className="space-x-4 text-lg hidden md:flex">
         <NavItem to="/" text="Home" />
         <NavItem to="/upload" text="Upload" />
@@ -69,6 +68,7 @@ const Navbar = () => {
           onClick={toggleMenu}
           className="p-2 rounded-md hover:bg-[#536b8e] transition duration-300"
         >
+          {/* Toggle between open and close icon */}
           {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
           <button
             onClick={() => {
               handleLogout();
-              toggleMenu();
+              toggleMenu(); // Close menu after logout
             }}
             className="hover:text-black hover:underline transition"
           >
@@ -103,6 +103,7 @@ const Navbar = () => {
   );
 };
 
+// ✅ Nav item component for links
 const NavItem = ({ to, text, onClick }) => (
   <Link
     to={to}
@@ -114,5 +115,4 @@ const NavItem = ({ to, text, onClick }) => (
 );
 
 export default Navbar;
-
 

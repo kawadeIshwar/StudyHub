@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { useState } from 'react';       // To manage form state
+import axios from 'axios';              // For API requests
+import { toast, ToastContainer } from 'react-toastify';  // Toast notifications
 import 'react-toastify/dist/ReactToastify.css';
 
 const UploadForm = () => {
@@ -12,29 +12,29 @@ const UploadForm = () => {
     file: null,
   });
 
-  // Handle input change
+  // ✅ Handle input change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [name]: files ? files[0] : value,
+      [name]: files ? files[0] : value,  // If file input, take file
     });
   };
 
-  // Submit form data to backend
+  // ✅ Submit form data to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');  // Get token from storage
     if (!token) {
       toast.info("Please login first to upload notes.");
       setTimeout(() => {
-        window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+        window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`; // Redirect to login
       }, 1500);
       return;
     }
 
-    const data = new FormData();
+    const data = new FormData();  // Create FormData for file upload
     data.append('title', formData.title);
     data.append('subject', formData.subject);
     data.append('semester', formData.semester);
@@ -46,17 +46,17 @@ const UploadForm = () => {
         axios.post('http://localhost:5000/api/upload', data, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,  // Send token for auth
           },
         }),
         {
-          pending: 'Uploading note...',
+          pending: 'Uploading note...',  // Show toast while uploading
           success: 'Note uploaded successfully!',
           error: 'Upload failed!',
         }
       );
 
-      // Reset form after upload
+      // ✅ Reset form after upload
       setFormData({
         title: '',
         subject: '',
@@ -82,6 +82,7 @@ const UploadForm = () => {
             Upload Notes
           </h2>
 
+          {/* Form Inputs */}
           <input
             type="text"
             name="title"
@@ -129,6 +130,7 @@ const UploadForm = () => {
             required
           />
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="bg-gray-950 text-gray-400 border border-gray-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
@@ -138,14 +140,13 @@ const UploadForm = () => {
           </button>
         </form>
 
+        {/* Image beside form (for large screens only) */}
         <img
           src="student-12.png"
           alt="student"
           className="rounded-tr-[30px] rounded-br-[30px] animate-fadeIn hidden custom-lg:block h-full"
         />
       </div>
-
-      
     </div>
   );
 };
