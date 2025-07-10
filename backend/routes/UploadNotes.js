@@ -53,4 +53,7 @@ router.get('/all', async (req, res) => {
 
 
 export default router;
-
+// This code defines an Express.js route for uploading notes
+// It uses multer for file handling and Cloudinary for storage
+// The route is protected by an authentication middleware
+// It saves the note details in a MongoDB database and returns the uploaded note information

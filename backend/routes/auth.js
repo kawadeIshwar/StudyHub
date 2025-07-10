@@ -48,3 +48,8 @@ router.post('/login', async (req, res) => {
 });
 
 export default router; // Export the router so it can be used in server.js
+
+// This code defines authentication routes for user signup and login.
+// The signup route creates a new user after checking if they already exist and hashing their password.
+// The login route checks if the user exists, verifies the password, and generates a JWT token for authenticated access.
+// If any errors occur, appropriate error messages are returned.  
