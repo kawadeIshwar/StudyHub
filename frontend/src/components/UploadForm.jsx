@@ -1,7 +1,7 @@
 import { useState } from 'react';       // To manage form state
-import axios from 'axios';              // For API requests
 import { toast, ToastContainer } from 'react-toastify';  // Toast notifications
 import 'react-toastify/dist/ReactToastify.css';
+import { notesAPI } from '../utils/api';
 
 const UploadForm = () => {
   const [formData, setFormData] = useState({
@@ -43,12 +43,7 @@ const UploadForm = () => {
 
     try {
       await toast.promise(
-        axios.post('https://studyhub-backend-kxxh.onrender.com/api/upload', data, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`,  // Send token for auth
-          },
-        }),
+        notesAPI.upload(data),
         {
           pending: 'Uploading note...',  // Show toast while uploading
           success: 'Note uploaded successfully!',

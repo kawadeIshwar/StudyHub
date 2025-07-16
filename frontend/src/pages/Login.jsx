@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { authAPI } from '../utils/api';
 
 
 const Login = () => {
@@ -14,13 +14,10 @@ const Login = () => {
   // Get redirect path (or go to home if none)
   const redirectPath = new URLSearchParams(location.search).get('redirect') || '/';
 
-  // Handle Login
+// Handle Login
 const handleLogin = async () => {
   try {
-    const res = await axios.post('https://studyhub-backend-kxxh.onrender.com/api/auth/login', {
-      email,
-      password,
-    });
+    const res = await authAPI.login({ email, password });
 
     const token = res.data.token;
     localStorage.setItem('token', token);
@@ -33,11 +30,12 @@ const handleLogin = async () => {
 
     // Redirect after 1.5 seconds
     setTimeout(() => {
-      window.location.href = '/';  // Change '/' to your home page route
-    }, 2000);
+      navigate(redirectPath);
+    }, 1500);
 
   } catch (err) {
-    toast.error(err.response?.data?.error || 'Login failed! Please try again.');
+    console.error('Login error:', err);
+    toast.error(err.response?.data?.error || err.response?.data?.msg || 'Login failed! Please try again.');
   }
 };
 

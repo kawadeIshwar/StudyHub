@@ -1,9 +1,11 @@
 import { useState } from 'react';    // To manage form data
-import axios from 'axios';           // For API requests
 import { toast } from 'react-toastify';  // For toast messages
 import 'react-toastify/dist/ReactToastify.css';
+import { authAPI } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,17 +25,18 @@ const Signup = () => {
     e.preventDefault(); // Prevent page reload
 
     try {
-      const res = await axios.post('https://studyhub-backend-kxxh.onrender.com/api/auth/signup', formData);
+      const res = await authAPI.signup(formData);
       toast.success('Registered successfully!');
 
       setFormData({ name: '', email: '', password: '' }); // Reset form
 
-      // ✅ Redirect to login page after 2 sec
+      // ✅ Redirect to login page after 1.5 sec
       setTimeout(() => {
-        window.location.href = '/login';
-      }, 2000);
+        navigate('/login');
+      }, 1500);
     } catch (err) {
-      toast.error(err.response?.data?.msg || 'Signup failed!');
+      console.error('Signup error:', err);
+      toast.error(err.response?.data?.msg || err.response?.data?.error || 'Signup failed!');
     }
   };
 

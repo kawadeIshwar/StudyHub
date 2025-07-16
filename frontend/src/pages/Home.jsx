@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { notesAPI } from '../utils/api';
 import NoteCard from "../components/NoteCard";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('https://studyhub-backend-kxxh.onrender.com/api/upload/all');
+        const res = await notesAPI.getAll();
         setNotes(res.data.slice(0, 5)); 
       } catch (err) {
         console.error("Failed to load notes", err);
