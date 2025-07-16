@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
 
   try {
     // Verify token using secret key, returns decoded data if valid
-    const verified = jwt.verify(token, 'secret123');
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
     req.user = verified;
     next();
   } catch (err) {
