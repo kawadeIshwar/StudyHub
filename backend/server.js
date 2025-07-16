@@ -12,7 +12,7 @@ const app = express();
 
 // ✅ CORS setup for production
 const allowedOrigins = [
-  "https://studyhub4all.netify.app",
+  "https://studyhub4all.netlify.app",
   "http://localhost:3000",
   "http://localhost:5173"
 ];
