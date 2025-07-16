@@ -23,7 +23,7 @@ const Signup = () => {
     e.preventDefault(); // Prevent page reload
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      const res = await axios.post('https://studyhub-backend-kxxh.onrender.com/api/auth/signup', formData);
       toast.success('Registered successfully!');
 
       setFormData({ name: '', email: '', password: '' }); // Reset form

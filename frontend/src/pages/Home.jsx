@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/upload/all');
+        const res = await axios.get('https://studyhub-backend-kxxh.onrender.com/api/upload/all');
         setNotes(res.data.slice(0, 5)); 
       } catch (err) {
         console.error("Failed to load notes", err);

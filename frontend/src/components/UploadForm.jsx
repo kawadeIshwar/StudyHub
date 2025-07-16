@@ -43,7 +43,7 @@ const UploadForm = () => {
 
     try {
       await toast.promise(
-        axios.post('http://localhost:5000/api/upload', data, {
+        axios.post('https://studyhub-backend-kxxh.onrender.com/api/upload', data, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`,  // Send token for auth

@@ -14,7 +14,7 @@ const Notes = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/upload/all');
+        const res = await axios.get('https://studyhub-backend-kxxh.onrender.com/api/upload/all');
         setNotes(res.data); // Save notes in state
         
       } catch (error) {

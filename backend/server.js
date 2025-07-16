@@ -1,36 +1,39 @@
+import express from 'express';
+import uploadRoutes from './routes/UploadNotes.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import authRoutes from './routes/auth.js';
+import deleteRoutes from './routes/DeleteNotes.js';
 
-import express from 'express'; // Framework to build backend
-import uploadRoutes from './routes/UploadNotes.js';// Upload notes routes
-import mongoose from 'mongoose'; // For MongoDB connection
-import dotenv from 'dotenv'; // Load .env file variables
-import cors from 'cors'; // Allow frontend to talk to backend
-import authRoutes from './routes/auth.js'; // Auth (login/register) routes
-import deleteRoutes from './routes/DeleteNotes.js'; // Delete notes routes
+dotenv.config();
 
-dotenv.config(); // Load environment variables
+const app = express();
 
-const app = express(); // Create express app
+// ✅ CORS setup for Netlify (replace with your actual Netlify URL)
+app.use(cors({
+  origin: "https://6877feb6b6314ac931a562e4--studyhub4all.netlify.app/upload", 
+  credentials: true
+}));
 
-// Middleware
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Parse JSON data from frontend
+app.use(express.json());
 
 // Routes
-app.use('/api/upload', uploadRoutes); // Notes upload route
-app.use('/api/auth', authRoutes); // Auth route
-app.use('/api/notes', deleteRoutes); // Delete notes route
+app.use('/api/upload', uploadRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/notes', deleteRoutes);
 
-// Error handler (for any server error)
+// Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Show error in terminal
-  res.status(500).send('Something broke!'); // Send error to frontend
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 5000; // Use port from .env or 5000
+const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`)); // Start server
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
   })
-  .catch((err) => console.log(err)); // Log DB connection error
+  .catch((err) => console.log(err));
+

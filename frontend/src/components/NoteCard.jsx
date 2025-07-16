@@ -39,7 +39,7 @@ const NoteCard = ({ id, title, subject, uploader, uploaderName, date, likes, fil
   // ✅ Delete Handler
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+      await axios.delete(`https://studyhub-backend-kxxh.onrender.com/api/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` }, // Send token for auth
       });
       toast.success("Note deleted");
