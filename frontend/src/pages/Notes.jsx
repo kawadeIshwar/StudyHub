@@ -86,7 +86,7 @@ const Notes = () => {
             />
           ))
         ) : (
-          <p className="text-gray-500 text-lg mt-10">No notes found.</p>
+          <p className="text-gray-500 text-lg mt-10">Loading Notes. Please Wait</p>
         )}
       </div>
     </div>
