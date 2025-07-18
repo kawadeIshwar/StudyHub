@@ -2,7 +2,7 @@
 
 StudyHub is a fully responsive **MERN Stack** web application that allows students to **upload, preview, and share study notes** easily. Whether you're a creator or a learner, StudyHub helps you organize and access learning materials in one place.
 
-## 🌟 Features
+## 🌟 Features 
 
 - 📄 Upload & Download Notes (PDF, DOCX, PPTX, etc.)
 - 🔍 Search Notes
@@ -22,19 +22,19 @@ StudyHub is a fully responsive **MERN Stack** web application that allows studen
 🔗 [Visit StudyHub](https://studyhub4all.netlify.app/)
 
 ## 📂 Folder Structure
-StudyHub/
-├──  # Frontend (React)
-│ ├── components/
-│ ├── pages/
-│ ├── App.js
-│ └── ...
-├──  # Backend (Node + Express)
-│ ├── controllers/
-│ ├── models/
-│ ├── routes/
-│ └── index.js
-├── README.md
-└── ...
+StudyHub/ 
+├──  # Frontend (React) 
+│ ├── components/ 
+│ ├── pages/ 
+│ ├── App.js 
+│ └── ... 
+├──  # Backend (Node + Express) 
+│ ├── controllers/ 
+│ ├── models/ 
+│ ├── routes/ 
+│ └── index.js 
+├── README.md 
+└── ... 
 
 
 ## ⚙️ Installation
@@ -45,7 +45,7 @@ StudyHub/
    git clone https://github.com/kawadeIshwar/Study-Hub.git
 
 3. Install frontend & backend dependencies:
-Edit
+
 cd Study-Hub/frontend
 npm install
 
