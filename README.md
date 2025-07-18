@@ -68,30 +68,31 @@ StudyHub/
 
 3. Set up .env file in the server folder:
 
-MONGO_URI=your_mongodb_connection
+      MONGO_URI=your_mongodb_connection
 
-CLOUDINARY_CLOUD_NAME=your_cloud_name
+      CLOUDINARY_CLOUD_NAME=your_cloud_name
 
-CLOUDINARY_API_KEY=your_api_key
+      CLOUDINARY_API_KEY=your_api_key
 
-CLOUDINARY_API_SECRET=your_api_secret
+      CLOUDINARY_API_SECRET=your_api_secret
 
 
 4. Run the project:
    
-#Backend
+      #Backend
 
-cd backend
+      cd backend
 
-npm run dev
+      npm run dev
 
 🙌 Contributions
-Feel free to fork, raise issues, or create PRs. Feedback and suggestions are always welcome!
+      Feel free to fork, raise issues, or create PRs. Feedback and suggestions are always welcome!
 
 📬 Contact
-Created by Ishwar Kawade
-🔗 LinkedIn: www.linkedin.com/in/ishwarkawade
+      Created by Ishwar Kawade
+      
+      🔗 LinkedIn: www.linkedin.com/in/ishwarkawade
 
-📧 kawadeishwar@gmail.com
+      📧 kawadeishwar@gmail.com
 
 
