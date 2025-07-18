@@ -45,7 +45,6 @@ StudyHub/
    git clone https://github.com/kawadeIshwar/Study-Hub.git
 
 3. Install frontend & backend dependencies:
-
 Edit
 cd Study-Hub/frontend
 npm install
@@ -62,7 +61,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 4. Run the project:
    
-# Backend
+#Backend
 cd backend
 npm run dev
 
