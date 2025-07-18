@@ -86,9 +86,11 @@ StudyHub/
       npm run dev
 
 🙌 Contributions
+
       Feel free to fork, raise issues, or create PRs. Feedback and suggestions are always welcome!
 
 📬 Contact
+
       Created by Ishwar Kawade
       
       🔗 LinkedIn: www.linkedin.com/in/ishwarkawade
