@@ -25,16 +25,27 @@ StudyHub is a fully responsive **MERN Stack** web application that allows studen
 StudyHub/ 
 
 ├──  # Frontend (React) 
+
 │ ├── components/ 
+
 │ ├── pages/ 
+
 │ ├── App.js 
+
 │ └── ... 
+
 ├──  # Backend (Node + Express) 
+
 │ ├── controllers/ 
+
 │ ├── models/ 
+
 │ ├── routes/ 
+
 │ └── index.js 
+
 ├── README.md 
+
 └── ... 
 
 
@@ -80,6 +91,7 @@ Feel free to fork, raise issues, or create PRs. Feedback and suggestions are alw
 📬 Contact
 Created by Ishwar Kawade
 🔗 LinkedIn: www.linkedin.com/in/ishwarkawade
+
 📧 kawadeishwar@gmail.com
 
 
