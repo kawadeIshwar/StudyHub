@@ -23,17 +23,29 @@ StudyHub is a fully responsive **MERN Stack** web application that allows studen
 
 ## 📂 Folder Structure
 StudyHub/ 
+
 ├──  # Frontend (React) 
+
 │ ├── components/ 
+
 │ ├── pages/ 
+
 │ ├── App.js 
+
 │ └── ... 
+
 ├──  # Backend (Node + Express) 
+
 │ ├── controllers/ 
+
 │ ├── models/ 
+
 │ ├── routes/ 
+
 │ └── index.js 
+
 ├── README.md 
+
 └── ... 
 
 
@@ -46,23 +58,31 @@ StudyHub/
 
 3. Install frontend & backend dependencies:
 
-cd Study-Hub/frontend
-npm install
+      cd Study-Hub/frontend
+   
+      npm install
 
-cd ../backend
-npm install
+      cd ../backend
+   
+      npm install
 
 3. Set up .env file in the server folder:
 
 MONGO_URI=your_mongodb_connection
+
 CLOUDINARY_CLOUD_NAME=your_cloud_name
+
 CLOUDINARY_API_KEY=your_api_key
+
 CLOUDINARY_API_SECRET=your_api_secret
+
 
 4. Run the project:
    
 #Backend
+
 cd backend
+
 npm run dev
 
 🙌 Contributions
