@@ -24,12 +24,18 @@ Other Tools: Axios, JWT for authentication
 ### 📂 Project Structure
 ``
 StudyHub/
-├── Frontend/        # Frontend (React)
+├── Frontend/    # Frontend (React)
+
 ├── backend/        # Backend (Node + Express)
+
 ├── models/        # Database models (MongoDB)
+
 ├── routes/        # API routes
+
 ├── controllers/   # Backend logic
+
 └── README.md
+
 ``
 
 ### ⚙️ Installation
